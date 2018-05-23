@@ -12,6 +12,13 @@ router.get('/', (req,res)=> {
     })
 })
 
+router.get('/:id', (req,res)=> {
+    wardController.getWard(req.params.id).then((data) => {
+        res.setHeader('Content-Type', 'application/json')
+        res.status(data.status).send(data.ward);
+    })
+})
+
 router.post('/', (req,res) => {
     wardController.insertWard(req.body).then((data) => {
         res.status(data.status).send(data.message);

@@ -1,11 +1,5 @@
 var mongoose = require('../db//dbConfig');
 var wardSchema = mongoose.model('Ward');
-//var wards = '"wards": [ {"id":"1", "name": "Ward 1"} , {"id":"2", "name": "Ward 2"}, {"id":"3", "name": "Ward 3"} ]';
-var wards = [
-    {id: "1", name:"Ward 1"},
-    {id: "2", name:"Ward 2"},
-    {id: "3", name:"Ward 3"}
-]
 
 function Controller() {
 
@@ -43,15 +37,44 @@ function Controller() {
         })
     };
 
+    this.getWard = (id) => {
+        return new Promise((resolve, reject) => {
+            wardSchema.find({
+                id: id
+            }).exec().then((data) => {
+                resolve({
+                    status: 200,
+                    ward: data
+                })
+            }).catch((err)=>{
+                reject({
+                    status: 404,
+                    message: "Error:- User not found "
+                })
+            })
+        })
+    }
+
     this.updateWard = (data) => {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject)=>{
+            wardSchema.update(
+                {id: data.id},data).then(()=> {
+                    resolve({
+                        status: 200,
+                        message: "Ward Updated Successfully"
+                    })
+                }).catch((err)=>{
+                    reject({
+                        status: 500,
+                        message: "Error:- " + err
+                    })
+                })
         })
     }
 
     this.deleteWard = (id) => {
-        console.log(id);
         return new Promise((resolve,reject) => {
-            wardSchema.remove({id: id}).then((data)=>{
+            wardSchema.deleteOne({id: id}).then(()=> {
                 resolve({
                     status: 200,
                     message: "Ward deleted"
