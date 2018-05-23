@@ -2,7 +2,10 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 
+var router = require('./routes.js')
+
 app.use(bodyParser.json())
+app.use(router)
 
 app.listen('3000','localhost',(err)=>{
     if(err)
