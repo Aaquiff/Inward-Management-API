@@ -14,16 +14,20 @@ router.get('/', (req,res)=> {
 
 router.post('/', (req,res) => {
     wardController.insertWard(req.body).then((data) => {
-        res.status(data.status).send(data.ward);
+        res.status(data.status).send(data.message);
     })
 })
 
 router.put('/:id', (req,res) => {
-    res.send(req.body);
+    wardController.updateWard(req.body).then((data) => {
+        res.status(data.status).send(data.ward);
+    })
 })
 
 router.delete('/:id', (req,res) => {
-
+    wardController.deleteWard(req.params.id).then((data) => {
+        res.status(data.status).send(data.message);
+    })
 })
 
 module.exports = router;
