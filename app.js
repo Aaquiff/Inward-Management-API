@@ -5,7 +5,9 @@ var bodyParser = require('body-parser')
 var router = require('./routes.js')
 
 app.use(bodyParser.json())
-app.use(router)
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.use('/', router)
 
 app.listen('3000','localhost',(err)=>{
     if(err)
