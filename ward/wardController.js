@@ -7,6 +7,7 @@ function Controller() {
         return new Promise((resolve,reject) => {
             var ward = new wardSchema(data);
             ward.save().then(()=> {
+                console.log('Ward inserted')
                 resolve({
                     status: 200,
                     message: "Ward inserted"
