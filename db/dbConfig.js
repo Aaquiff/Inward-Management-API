@@ -1,5 +1,6 @@
 var mongoose =  require('mongoose')
 var Schema = mongoose.Schema;
+var autoIncrement = require('mongoose-auto-increment');
 
 var WardSchema = new Schema({
     wardNo: { type: String, require: true },
@@ -28,5 +29,9 @@ mongoose.connect('mongodb+srv://root:root@cluster0-uemqc.mongodb.net/test?retryW
         console.log('Connected to database');
     }
 })
+
+autoIncrement.initialize(mongoose.connection);
+BedSchema.plugin(autoIncrement.plugin, {model: 'Bed', field: 'bedNo'})
+
 
 module.exports = mongoose;

@@ -22,6 +22,14 @@ router.get('/:id', (req,res)=> {
     })
 })
 
+router.get('/:id/beds', (req,res)=> {
+    console.log('GET /wards/'+req.params.id+'beds');
+    wardController.getBedsForWard(req.params.id).then((data) => {
+        res.setHeader('Content-Type', 'application/json')
+        res.status(data.status).send(data.beds);
+    })
+})
+
 router.post('/', (req,res) => {
     console.log('POST /wards body: ' + JSON.stringify(req.body));
     wardController.insertWard(req.body).then((data) => {

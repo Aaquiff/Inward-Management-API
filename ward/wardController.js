@@ -1,5 +1,6 @@
 var mongoose = require('../db//dbConfig');
 var wardSchema = mongoose.model('Ward');
+var bedSchema = mongoose.model('Bed');
 
 function Controller() {
 
@@ -84,6 +85,24 @@ function Controller() {
                 reject({
                     status: 500,
                     message: err
+                })
+            })
+        })
+    }
+
+    this.getBedsForWard = (id) => {
+        return new Promise((resolve, reject) => {
+            bedSchema.find({
+                wardNo: id
+            }).exec().then((data) => {
+                resolve({
+                    status: 200,
+                    beds: data
+                })
+            }).catch((err)=>{
+                reject({
+                    status: 404,
+                    message: "Error:- Beds not found "
                 })
             })
         })

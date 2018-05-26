@@ -6,6 +6,7 @@ function Controller() {
     this.insert = (data) => {
         return new Promise((resolve,reject) => {
             var bed = new bedSchema(data);
+            bed
             bed.save().then(()=> {
                 console.log('Bed inserted')
                 resolve({
