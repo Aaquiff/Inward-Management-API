@@ -17,8 +17,21 @@ var BedSchema = new Schema({
     wardNo: { type: String, require: false }
 })
 
+var AllergySchema = new Schema({
+    patientId:{ type: String, require: true},
+    allergyName:{ type: String, require: true},
+    allergyStatus:{ type: String, require: true},
+    allergyRemarks:{ type: String, require: true},
+    allergyCreateDate:{ type: String, require: true},
+    allergyCreateUser:{ type: String, require: true},
+    allergyLastupdateDate:{ type: String, require: true},
+    allergyLastupdateUser:{ type: String, require: true},
+    allergyActive:{ type: String, require: true}
+})
+
 mongoose.model('Ward', WardSchema);
 mongoose.model('Bed', BedSchema);
+mongoose.model('Allergy', AllergySchema);
 
 mongoose.connect('mongodb+srv://root:root@cluster0-uemqc.mongodb.net/test?retryWrites=true',(err) => {
     if (err) {
