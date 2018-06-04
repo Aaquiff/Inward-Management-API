@@ -1,5 +1,6 @@
 var mongoose =  require('mongoose')
 var Schema = mongoose.Schema;
+var prescriptionSchema = require('./prescriptionSchema')
 var autoIncrement = require('mongoose-auto-increment');
 
 var WardSchema = new Schema({
@@ -32,6 +33,7 @@ var AllergySchema = new Schema({
 mongoose.model('Ward', WardSchema);
 mongoose.model('Bed', BedSchema);
 mongoose.model('Allergy', AllergySchema);
+mongoose.model('Prescription', prescriptionSchema);
 
 mongoose.connect('mongodb+srv://root:root@cluster0-uemqc.mongodb.net/test?retryWrites=true',(err) => {
     if (err) {
@@ -45,6 +47,10 @@ mongoose.connect('mongodb+srv://root:root@cluster0-uemqc.mongodb.net/test?retryW
 
 autoIncrement.initialize(mongoose.connection);
 BedSchema.plugin(autoIncrement.plugin, {model: 'Bed', field: 'bedNo'})
-
+prescriptionSchema.plugin(autoIncrement.plugin, {
+    model: 'Prescription',
+    field: 'prescription_id',
+    startAt: 1000
+})
 
 module.exports = mongoose;
