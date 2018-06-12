@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router()
-var controller = require('./bedController')
+var controller = require('./bed.controller')
 
 var bodyParser = require('body-parser')
 router.use(bodyParser.json())

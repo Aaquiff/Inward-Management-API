@@ -3,21 +3,6 @@ var Schema = mongoose.Schema;
 var prescriptionSchema = require('./prescriptionSchema')
 var autoIncrement = require('mongoose-auto-increment');
 
-var WardSchema = new Schema({
-    wardNo: { type: String, require: true },
-    wardCategory: { type: String, require: false },
-    wardType: { type: String, require: false }
-})
-
-var BedSchema = new Schema({
-    bedNo: { type: String, require: true },
-    bedType: { type: String, require: false },
-    bhtNo: { type: String, require: false },
-    patientId: { type: String, require: false },
-    availability: { type: String, require: false },
-    wardNo: { type: String, require: false }
-})
-
 var AllergySchema = new Schema({
     patientId:{ type: String, require: true},
     allergyName:{ type: String, require: true},
@@ -28,10 +13,8 @@ var AllergySchema = new Schema({
     allergyLastupdateDate:{ type: String, require: true},
     allergyLastupdateUser:{ type: String, require: true},
     allergyActive:{ type: String, require: true}
-})
+});
 
-mongoose.model('Ward', WardSchema);
-mongoose.model('Bed', BedSchema);
 mongoose.model('Allergy', AllergySchema);
 mongoose.model('Prescription', prescriptionSchema);
 
@@ -46,7 +29,7 @@ mongoose.connect('mongodb+srv://root:root@cluster0-uemqc.mongodb.net/test?retryW
 })
 
 autoIncrement.initialize(mongoose.connection);
-BedSchema.plugin(autoIncrement.plugin, {model: 'Bed', field: 'bedNo'})
+
 prescriptionSchema.plugin(autoIncrement.plugin, {
     model: 'Prescription',
     field: 'prescription_id',

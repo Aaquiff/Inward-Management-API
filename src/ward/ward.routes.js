@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router()
-var wardController = require('./wardController')
+var wardController = require('./ward.controller')
 
 var bodyParser = require('body-parser')
 router.use(bodyParser.json())

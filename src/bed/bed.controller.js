@@ -1,17 +1,17 @@
-var mongoose = require('../db//dbConfig');
-var wardSchema = mongoose.model('Ward');
+var mongoose = require('./bed.model');
 var bedSchema = mongoose.model('Bed');
 
 function Controller() {
 
-    this.insertWard = (data) => {
+    this.insert = (data) => {
         return new Promise((resolve,reject) => {
-            var ward = new wardSchema(data);
-            ward.save().then(()=> {
-                console.log('Ward inserted')
+            var bed = new bedSchema(data);
+            bed
+            bed.save().then(()=> {
+                console.log('Bed inserted')
                 resolve({
                     status: 200,
-                    message: "Ward inserted"
+                    message: "Bed inserted"
                 })
             }).catch((err)=> {
                 reject( {
@@ -24,10 +24,10 @@ function Controller() {
 
     this.getAll = () => {
         return new Promise((resolve,reject)=> {
-            wardSchema.find().exec().then((data) => {
+            bedSchema.find().exec().then((data) => {
                 resolve({
                     status: 200,
-                    wards: data
+                    beds: data
                 })
             }).catch((err)=> {
                 reject({
@@ -39,31 +39,31 @@ function Controller() {
         })
     };
 
-    this.getWard = (id) => {
+    this.get = (id) => {
         return new Promise((resolve, reject) => {
-            wardSchema.find({
-                wardNo: id
+            bedSchema.find({
+                bedNo: id
             }).exec().then((data) => {
                 resolve({
                     status: 200,
-                    ward: data
+                    bed: data
                 })
             }).catch((err)=>{
                 reject({
                     status: 404,
-                    message: "Error:- Ward not found "
+                    message: "Error:- Bed not found "
                 })
             })
         })
     }
 
-    this.updateWard = (data) => {
+    this.update = (data) => {
         return new Promise((resolve, reject)=>{
-            wardSchema.update(
-                {wardNo: data.id},data).then(()=> {
+            bedSchema.update(
+                {bedNo: data.bedNo},data).then(()=> {
                     resolve({
                         status: 200,
-                        message: "Ward Updated Successfully"
+                        message: "Bed Updated Successfully"
                     })
                 }).catch((err)=>{
                     reject({
@@ -74,35 +74,17 @@ function Controller() {
         })
     }
 
-    this.deleteWard = (id) => {
+    this.delete = (id) => {
         return new Promise((resolve,reject) => {
-            wardSchema.deleteOne({wardNo: id}).then(()=> {
+            bedSchema.deleteOne({bedNo: id}).then(()=> {
                 resolve({
                     status: 200,
-                    message: "Ward deleted"
+                    message: "Bed deleted"
                 })
             }).catch((err)=> {
                 reject({
                     status: 500,
                     message: err
-                })
-            })
-        })
-    }
-
-    this.getBedsForWard = (id) => {
-        return new Promise((resolve, reject) => {
-            bedSchema.find({
-                wardNo: id
-            }).exec().then((data) => {
-                resolve({
-                    status: 200,
-                    beds: data
-                })
-            }).catch((err)=>{
-                reject({
-                    status: 404,
-                    message: "Error:- Beds not found "
                 })
             })
         })
