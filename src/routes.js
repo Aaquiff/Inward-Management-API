@@ -4,13 +4,11 @@ var wardRoutes = require('./ward/ward.routes')
 var bedRoutes = require('./bed/bed.routes')
 var prescriptionRoutes = require('./prescription/prescription.routes')
 var allergyRoutes = require('./allergy/allergyRoutes')
-var userRoutes = require('./user/user.routes')
 
 router.use('/wards',wardRoutes);
 router.use('/beds',bedRoutes);
 router.use('/prescription/', prescriptionRoutes)
 router.use('/allergies', allergyRoutes)
-router.use('/users', userRoutes)
 
 router.get('/', (req,res) => {
     res.send('Inward');
