@@ -24,22 +24,9 @@ app.use(passport.session())
 
 app.use('/', require('./src/user/user.routes'))
 
-app.use((req, res, next) => {
-    if (req.session.user) {
-        next();
-    } else {
-        res.status(401).send('Authrization failed! Please login');
-    }
-});
+
 
 app.use('/api', router)
-
-app.get('/protected', (req,res)=>{
-    res.send(`You seeing this because you have a valid session.
-    	Your username is ${req.session.user.username} 
-        and email is ${req.session.user.email}.
-    `)
-})
 
 app.listen('3000','localhost',(err)=>{
     if(err)

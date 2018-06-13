@@ -1,4 +1,8 @@
 var UserSchema = require('./user.model').model('User');
+var config = require('../config');
+var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
+
 
 function Controller() {
 
@@ -8,8 +12,16 @@ function Controller() {
             UserSchema.findOne({
                 username: user.username
             }).exec().then((data) => {
+                console.log(data.id)
+                var token = jwt.sign({ id: data._id }, config.secret, {
+                    expiresIn: 86400 // expires in 24 hours
+                });
                 if(data.password == password)
-                    resolve({status: 200, message: "logged in", user: data})
+                    resolve({
+                        status: 200,
+                        auth: true,
+                        user: data,
+                        token: token})
                 else
                     resolve({status: 401, message: "incorrect password"})
             }).catch((err)=> {
