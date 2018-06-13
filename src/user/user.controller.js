@@ -21,13 +21,19 @@ function Controller() {
                         status: 200,
                         auth: true,
                         user: data,
-                        token: token})
+                        token: token,
+                        message: "Logged in successfully"
+                    })
                 else
-                    resolve({status: 401, message: "incorrect password"})
+                    resolve({
+                        status: 401,
+                        message: "incorrect password",
+                        auth: false
+                    })
             }).catch((err)=> {
                 reject({
                     status: 500,
-                    message: "Error "  + err
+                    message: "Failed to login"
                 })
             })
 

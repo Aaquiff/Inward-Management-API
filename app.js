@@ -22,9 +22,21 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.get('/admissions',(req,res)=>{
+    var admissions = [
+        {BHTNo: 20181, PatientId: 1,
+            PatientName: 'Mr.Ruwan Perera',
+            WardNo: 1, BedNo: 1, Admitted: '2018-03-15',
+            AdmittedTime: '09.00am'},
+        {BHTNo: 20182, PatientId: 1,
+            PatientName: 'Mr.Ruwan Perera',
+            WardNo: 1, BedNo: 1, Admitted: '2018-03-15',
+            AdmittedTime: '09.00am'}
+    ]
+    res.status(200).send(admissions);
+});
+
 app.use('/', require('./src/user/user.routes'))
-
-
 
 app.use('/api', router)
 
