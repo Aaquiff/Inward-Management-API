@@ -8,6 +8,8 @@ const passport = require('passport')
 
 const router = require('./src/routes.js')
 
+const data = require('./src/dummyData')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
@@ -36,9 +38,15 @@ app.get('/admissions',(req,res)=>{
     res.status(200).send(admissions);
 });
 
+app.get('/dummy', (req, res) => {
+    data.insertAdmissionData();
+    res.status(200).send("success");
+})
+
 app.use('/', require('./src/user/user.routes'))
 
 app.use('/api', router)
+
 
 app.listen('3000','localhost',(err)=>{
     if(err)

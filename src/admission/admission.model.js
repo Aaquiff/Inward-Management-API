@@ -22,7 +22,7 @@ var AdmissionSchema = new Schema({
         type: String,
         require: true
     },
-    monthlyNoNo: {
+    monthlyNo: {
         type: String,
         require: true
     },
