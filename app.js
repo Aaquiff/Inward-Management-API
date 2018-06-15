@@ -28,7 +28,7 @@ app.use('/', require('./src/user/user.routes'))
 
 app.use('/api', router)
 
-app.listen('3000',(err)=>{
+app.listen('3000', 'http://ec2-13-232-115-15.ap-south-1.compute.amazonaws.com', (err)=>{
     if(err)
     {
         console.error(err);
