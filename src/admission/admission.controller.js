@@ -41,8 +41,8 @@ function Controller() {
 
     this.get = (id) => {
         return new Promise((resolve, reject) => {
-            AdmissionSchema.find({
-                _id: id
+            AdmissionSchema.findOne({
+                admissionId: id
             }).populate('doctor').populate('patient').exec().then((data) => {
                 resolve({
                     status: 200,

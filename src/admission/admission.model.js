@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var autoIncrement = require('mongoose-auto-increment');
 
 var AdmissionSchema = new Schema({
-    admisionId: {
+    admissionId: {
         type: Number,
         require: true
     },
@@ -65,6 +65,6 @@ AdmissionSchema.set('toJSON', {virtuals: true});
 mongoose.model('Admission', AdmissionSchema);
 
 autoIncrement.initialize(mongoose.connection);
-AdmissionSchema.plugin(autoIncrement.plugin, {model: 'Admission', field: 'admisionId', startAt: 100000});
+AdmissionSchema.plugin(autoIncrement.plugin, {model: 'Admission', field: 'admissionId', startAt: 100000});
 
 module.exports = mongoose;
