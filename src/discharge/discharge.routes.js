@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var DischargeController = require('./discharge.controller');
+var AdmissionController = require('../admission/admission.controller');
 
 var bodyParser = require('body-parser');
 router.use(bodyParser.json());
@@ -21,8 +22,16 @@ router.get('/:id', (req,res)=> {
 })
 
 router.post('/', (req,res) => {
-    DischargeController.insert(req.body).then((data) => {
+    console.log(req.body);
+    DischargeController.insert(req.body).then((data) => {       
+        AdmissionController.update({admissionId: req.body.admissionId, active: false}).then((res) => {
+            res.status(res.status).send(res.message);
+        }).catch((err) => {
+            //res.status(err.status).send(err.message);
+        })
         res.status(data.status).send(data.message);
+    }).catch((err) => {
+        res.status(err.status).send(err.message);
     })
 })
 

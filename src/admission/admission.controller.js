@@ -5,16 +5,16 @@ var AdmissionSchema = mongoose.model('Admission');
 function Controller() {
 
     this.insert = (data) => {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject) => {
             var admission = new AdmissionSchema(data);
-            admission.save().then(()=> {
+            admission.save().then(() => {
                 console.log('Admission inserted')
                 resolve({
                     status: 200,
                     message: "Admission inserted"
                 })
-            }).catch((err)=> {
-                reject( {
+            }).catch((err) => {
+                reject({
                     status: 500,
                     message: err
                 })
@@ -23,16 +23,16 @@ function Controller() {
     };
 
     this.getAll = () => {
-        return new Promise((resolve,reject)=> {
-            AdmissionSchema.find().populate('doctor').populate('patient').exec().then((data) => {
+        return new Promise((resolve, reject) => {
+            AdmissionSchema.find({active: true}).populate('doctor').populate('patient').exec().then((data) => {
                 resolve({
                     status: 200,
                     admissions: data
                 })
-            }).catch((err)=> {
+            }).catch((err) => {
                 reject({
                     status: 500,
-                    message: "Error "  + err
+                    message: "Error " + err
                 })
             })
 
@@ -42,13 +42,14 @@ function Controller() {
     this.get = (id) => {
         return new Promise((resolve, reject) => {
             AdmissionSchema.findOne({
-                admissionId: id
+                admissionId: id,
+                active: true
             }).populate('doctor').populate('patient').exec().then((data) => {
                 resolve({
                     status: 200,
                     admission: data
                 })
-            }).catch((err)=>{
+            }).catch((err) => {
                 reject({
                     status: 404,
                     message: "Error:- Admission not found "
@@ -58,14 +59,14 @@ function Controller() {
     }
 
     this.update = (data) => {
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             AdmissionSchema.update(
-                {_id: data.id},data).then(()=> {
+                { admissionId: data.admissionId }, data).then(() => {
                     resolve({
                         status: 200,
                         message: "Admission Updated Successfully"
                     })
-                }).catch((err)=>{
+                }).catch((err) => {
                     reject({
                         status: 500,
                         message: "Error:- " + err
@@ -75,13 +76,13 @@ function Controller() {
     }
 
     this.delete = (id) => {
-        return new Promise((resolve,reject) => {
-            AdmissionSchema.deleteOne({_id: id}).then(()=> {
+        return new Promise((resolve, reject) => {
+            AdmissionSchema.deleteOne({ admissionId: id }).then(() => {
                 resolve({
                     status: 200,
                     message: "Admission deleted"
                 })
-            }).catch((err)=> {
+            }).catch((err) => {
                 reject({
                     status: 500,
                     message: err

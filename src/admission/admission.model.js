@@ -42,6 +42,10 @@ var AdmissionSchema = new Schema({
     admittedDate: {
         type: Date,
         default: Date.now
+    },
+    active: {
+        type: Boolean,
+        default: true
     }
 });
 
