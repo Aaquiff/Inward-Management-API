@@ -6,6 +6,8 @@ var prescriptionRoutes = require('./prescription/prescription.routes');
 var allergyRoutes = require('./allergy/allergyRoutes');
 var admissionRoutes = require('./admission/admission.routes');
 var dischargeRoutes = require('./discharge/discharge.routes');
+var patientRoutes = require('./patient/patient.routes');
+var doctorRoutes = require('./doctor/doctor.routes');
 
 router.use('/wards',wardRoutes);
 router.use('/beds',bedRoutes);
@@ -13,6 +15,9 @@ router.use('/prescription/', prescriptionRoutes);
 router.use('/allergies', allergyRoutes);
 router.use('/admissions', admissionRoutes);
 router.use('/discharges', dischargeRoutes);
+router.use('/patients', patientRoutes);
+router.use('/doctors', doctorRoutes);
+
 
 router.get('/', (req,res) => {
     res.send('Inward');

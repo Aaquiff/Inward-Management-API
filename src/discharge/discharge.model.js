@@ -22,6 +22,10 @@ var DischargeSchema = new Schema({
         type: String,
         require: false
     },
+    refered: {
+        type: String,
+        require: false
+    },
     outcome: {
         type: String,
         require: false
