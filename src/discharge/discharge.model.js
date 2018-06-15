@@ -44,6 +44,20 @@ var DischargeSchema = new Schema({
     }
 })
 
+DischargeSchema.virtual('doctor', {
+    ref: 'Doctor',
+    localField: 'doctorId',
+    foreignField: 'doctorId',
+    justOne: true
+});
+
+DischargeSchema.virtual('patient', {
+    ref: 'Patient',
+    localField: 'patientId',
+    foreignField: 'patientId',
+    justOne: true
+});
+
 mongoose.model('Discharge', DischargeSchema);
 
 module.exports = mongoose;
