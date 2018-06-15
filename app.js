@@ -28,7 +28,7 @@ app.use('/', require('./src/user/user.routes'))
 
 app.use('/api', router)
 
-app.listen('3000', 'localhost', (err)=>{
+app.listen('3000', (err)=>{
     if(err)
     {
         console.error(err);
