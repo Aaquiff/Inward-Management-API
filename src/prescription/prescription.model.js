@@ -59,4 +59,4 @@ PrescriptionSchema.plugin(autoIncrement.plugin, {
     startAt: 1000
 })
 
-module.exports = PrescriptionSchema;
+module.exports = mongoose;
