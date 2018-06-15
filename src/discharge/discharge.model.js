@@ -41,6 +41,10 @@ var DischargeSchema = new Schema({
     icdCode: {
         type: String,
         require: false
+    },
+    admissionId: {
+        type: String,
+        require: false
     }
 });
 
@@ -55,6 +59,13 @@ DischargeSchema.virtual('patient', {
     ref: 'Patient',
     localField: 'patientId',
     foreignField: 'patientId',
+    justOne: true
+});
+
+DischargeSchema.virtual('admission', {
+    ref: 'Admission',
+    localField: 'admissionId',
+    foreignField: 'admissionId',
     justOne: true
 });
 

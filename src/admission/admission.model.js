@@ -1,7 +1,12 @@
 var mongoose = require('../db/dbConfig');
 var Schema = mongoose.Schema;
+var autoIncrement = require('mongoose-auto-increment');
 
 var AdmissionSchema = new Schema({
+    admisionId: {
+        type: Number,
+        require: true
+    },
     bhtNo: {
         type: String,
         require: true
@@ -38,7 +43,7 @@ var AdmissionSchema = new Schema({
         type: Date,
         default: Date.now
     }
-})
+});
 
 AdmissionSchema.virtual('doctor', {
     ref: 'Doctor',
@@ -54,9 +59,12 @@ AdmissionSchema.virtual('patient', {
     justOne: true
 });
 
-AdmissionSchema.set('toObject', {virtuals: true})
-AdmissionSchema.set('toJSON', {virtuals: true})
+AdmissionSchema.set('toObject', {virtuals: true});
+AdmissionSchema.set('toJSON', {virtuals: true});
 
 mongoose.model('Admission', AdmissionSchema);
+
+autoIncrement.initialize(mongoose.connection);
+AdmissionSchema.plugin(autoIncrement.plugin, {model: 'Admission', field: 'admisionId', startAt: 100000});
 
 module.exports = mongoose;
