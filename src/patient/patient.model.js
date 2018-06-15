@@ -16,7 +16,7 @@ var PatientSchema = new Schema({
     },
     dob: {
         type: Date,
-        required: true
+        required: false
     },
     nic: {
         type: String,

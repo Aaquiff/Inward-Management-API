@@ -23,10 +23,6 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-// app.get('/dummy', (req, res) => {
-//     data.insertAdmissionData();
-//     res.status(200).send("success");
-// })
 
 app.use('/', require('./src/user/user.routes'))
 

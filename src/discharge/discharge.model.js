@@ -42,7 +42,7 @@ var DischargeSchema = new Schema({
         type: String,
         require: false
     }
-})
+});
 
 DischargeSchema.virtual('doctor', {
     ref: 'Doctor',
@@ -57,6 +57,9 @@ DischargeSchema.virtual('patient', {
     foreignField: 'patientId',
     justOne: true
 });
+
+DischargeSchema.set('toObject', {virtuals: true});
+DischargeSchema.set('toJSON', {virtuals: true});
 
 mongoose.model('Discharge', DischargeSchema);
 

@@ -16,7 +16,7 @@ router.get('/', (req,res)=> {
 router.get('/:id', (req,res)=> {
     DischargeController.get(req.params.id).then((data) => {
         res.setHeader('Content-Type', 'application/json');
-        res.status(data.status).send(data.discharges);
+        res.status(data.status).send(data.discharge);
     })
 })
 

@@ -16,13 +16,16 @@ router.get('/', (req,res)=> {
 router.get('/:id', (req,res)=> {
     AdmissionController.get(req.params.id).then((data) => {
         res.setHeader('Content-Type', 'application/json');
-        res.status(data.status).send(data.admissions);
+        res.status(data.status).send(data.admission);
     })
 })
 
 router.post('/', (req,res) => {
     AdmissionController.insert(req.body).then((data) => {
+
         res.status(data.status).send(data.message);
+    }).catch((err) => {
+        res.status(err.status).send(err.message);
     })
 })
 

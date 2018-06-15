@@ -40,6 +40,23 @@ var AdmissionSchema = new Schema({
     }
 })
 
+AdmissionSchema.virtual('doctor', {
+    ref: 'Doctor',
+    localField: 'doctorId',
+    foreignField: 'doctorId',
+    justOne: true
+});
+
+AdmissionSchema.virtual('patient', {
+    ref: 'Patient',
+    localField: 'patientId',
+    foreignField: 'patientId',
+    justOne: true
+});
+
+AdmissionSchema.set('toObject', {virtuals: true})
+AdmissionSchema.set('toJSON', {virtuals: true})
+
 mongoose.model('Admission', AdmissionSchema);
 
 module.exports = mongoose;

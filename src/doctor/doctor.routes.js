@@ -23,6 +23,8 @@ router.get('/:id', (req,res)=> {
 router.post('/', (req,res) => {
     DoctorController.insert(req.body).then((data) => {
         res.status(data.status).send(data.message);
+    }).catch((err) => {
+        res.status(err.status).send(err.message);
     })
 })
 

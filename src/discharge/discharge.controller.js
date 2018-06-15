@@ -24,7 +24,7 @@ function Controller() {
 
     this.getAll = () => {
         return new Promise((resolve,reject)=> {
-            DischargeSchema.find().exec().then((data) => {
+            DischargeSchema.find().populate('doctor').populate('patient').exec().then((data) => {
                 resolve({
                     status: 200,
                     discharges: data
@@ -42,8 +42,8 @@ function Controller() {
     this.get = (id) => {
         return new Promise((resolve, reject) => {
             DischargeSchema.find({
-                id: id
-            }).exec().then((data) => {
+                _id: id
+            }).populate('doctor').populate('patient').exec().then((data) => {
                 resolve({
                     status: 200,
                     discharge: data
@@ -60,7 +60,7 @@ function Controller() {
     this.update = (data) => {
         return new Promise((resolve, reject)=>{
             DischargeSchema.update(
-                {id: data.id},data).then(()=> {
+                {_id: data.id},data).then(()=> {
                     resolve({
                         status: 200,
                         message: "Discharge Updated Successfully"
@@ -76,7 +76,7 @@ function Controller() {
 
     this.delete = (id) => {
         return new Promise((resolve,reject) => {
-            DischargeSchema.deleteOne({id: id}).then(()=> {
+            DischargeSchema.deleteOne({_id: id}).then(()=> {
                 resolve({
                     status: 200,
                     message: "Discharge deleted"
