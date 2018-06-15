@@ -1,4 +1,4 @@
-var mongoose = require('../db//dbConfig');
+var mongoose = require('../db/dbConfig');
 var autoIncrement = require('mongoose-auto-increment');
 
 var Schema = mongoose.Schema;
@@ -53,7 +53,7 @@ mongoose.model('Prescription', PrescriptionSchema);
 
 autoIncrement.initialize(mongoose.connection);
 
-prescriptionSchema.plugin(autoIncrement.plugin, {
+PrescriptionSchema.plugin(autoIncrement.plugin, {
     model: 'Prescription',
     field: 'prescription_id',
     startAt: 1000

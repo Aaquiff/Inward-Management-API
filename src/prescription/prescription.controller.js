@@ -1,5 +1,5 @@
-var mongoose = require('../db/dbConfig');
-//var PrescriptionSchema 		= mongoose.model('User');
+var mongoose = require('./prescription.model');
+//var PrescriptionSchema 	= mongoose.model('Prescription');
 
 var prescriptionController = function() {
     this.searchAllPrescribedDrugs = (bht, patientId) => {
