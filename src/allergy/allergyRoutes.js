@@ -55,4 +55,16 @@ router.put('/:id', function(req, res){
     })
 })
 
+router.delete('/:id/:aid', function(req, res){
+    controller.delete(req.params.aid).then(function(data){
+        res.status(data.status).send({
+            message: data.message
+        })
+    }).catch(function(err){
+        res.status(err.status).send({
+            message: err.message
+        })
+    })
+})
+
 module.exports = router;

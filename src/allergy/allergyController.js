@@ -75,6 +75,22 @@ function Controller(){
             })
         })
     }
+
+    this.delete = function(allergyId){
+        return new Promise(function(resolve, reject){
+            allergyShema.deleteOne({allergyId: allergyId}).exec().then(function(){
+                resolve({
+                    status: 200,
+                    message: "Success"
+                })
+            }).catch(function(err){
+                reject({
+                    status: 500,
+                    message: "Error " + err
+                })
+            })
+        })
+    }
 }
 
 module.exports = new Controller();
