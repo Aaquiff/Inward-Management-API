@@ -27,6 +27,23 @@ function Controller(){
             })
         })
     }
+
+    this.getAll = () => {
+        return new Promise((resolve,reject)=> {
+            transferShema.find().exec().then((data) => {
+                resolve({
+                    status: 200,
+                    hist: data
+                })
+            }).catch((err)=> {
+                reject({
+                    status: 500,
+                    message: "Error "  + err
+                })
+            })
+
+        })
+    };
 }
 
 module.exports = new Controller();
