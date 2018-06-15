@@ -17,6 +17,18 @@ router.get('/:id', function(req, res){
     })
 })
 
+router.get('/:id/:aid', function(req, res){
+    controller.getOne(req.params.id, req.params.aid).then(function(data){
+        res.status(data.status).send({
+            data: data.data
+        })
+    }).catch(function(err){
+        res.status(err.status).send({
+            message: err.message
+        })
+    })
+})
+
 router.post('/:id', function(req, res){
     console.log('PUT /allergies/' + req.params.id + ' body: ' + JSON.stringify(req.body));
     controller.add(req.params.id, req.body).then(function(data){

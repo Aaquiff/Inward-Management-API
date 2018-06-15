@@ -1,10 +1,26 @@
-var mongoose = require('../db/dbConfig');
+var mongoose = require('./allergyModel');
 var allergyShema = mongoose.model('Allergy');
 
 function Controller(){
     this.getAll = function (patientId){
         return new Promise(function (resolve, reject){
             allergyShema.find({patientId: patientId}).exec().then(function(data){
+                resolve({
+                    status: 200,
+                    data: data
+                });
+            }).catch(function(err){
+                reject({
+                    status: 500,
+                    message: "Error " + err
+                })
+            })
+        })
+    }
+
+    this.getOne = function (patientId, allergyId){
+        return new Promise(function (resolve, reject){
+            allergyShema.find({patientId: patientId, allergyId: allergyId}).exec().then(function(data){
                 resolve({
                     status: 200,
                     data: data
@@ -48,7 +64,7 @@ function Controller(){
 
     this.update = function(data){
         return new Promise(function(resolve, reject){
-            allergyShema.update({_id: data._id}, data).exec().then(function(){
+            allergyShema.update({allergyId: data.allergyId}, data).exec().then(function(){
                 resolve({
                     status: 200,
                     message: "Success"
