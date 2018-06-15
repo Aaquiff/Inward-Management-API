@@ -8,6 +8,7 @@ var admissionRoutes = require('./admission/admission.routes');
 var dischargeRoutes = require('./discharge/discharge.routes');
 var patientRoutes = require('./patient/patient.routes');
 var doctorRoutes = require('./doctor/doctor.routes');
+var intTransferRoutes = require('./internalTransfer/internalTransferRoutes')
 
 router.use('/wards',wardRoutes);
 router.use('/beds',bedRoutes);
@@ -17,6 +18,7 @@ router.use('/admissions', admissionRoutes);
 router.use('/discharges', dischargeRoutes);
 router.use('/patients', patientRoutes);
 router.use('/doctors', doctorRoutes);
+router.use('/inttransfers', intTransferRoutes);
 
 
 router.get('/', (req,res) => {

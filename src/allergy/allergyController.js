@@ -5,6 +5,7 @@ function Controller(){
     this.getAll = function (patientId){
         return new Promise(function (resolve, reject){
             allergyShema.find({patientId: patientId}).exec().then(function(data){
+                console.log(data);
                 resolve({
                     status: 200,
                     data: data
@@ -41,11 +42,8 @@ function Controller(){
                 allergyName: data.allergyName,
                 allergyStatus: data.allergyStatus,
                 allergyRemarks: data.allergyRemarks,
-                allergyCreateDate: data.allergyCreateDate,
-                allergyCreateUser: data.allergyCreateUser,
-                allergyLastupdateDate: data.allergyLastupdateDate,
-                allergyLastupdateUser: data.allergyLastupdateUser,
-                allergyActive: data.allergyActive
+                allergyCategory: data.allergyCategory,
+                allergySeverity: data.allergySeverity
             });
 
             allergy.save().then(function(){

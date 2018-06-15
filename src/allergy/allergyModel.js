@@ -7,11 +7,8 @@ var AllergySchema = new mongoose.Schema({
     allergyName:{ type: String, require: true},
     allergyStatus:{ type: String, require: true},
     allergyRemarks:{ type: String, require: true},
-    allergyCreateDate:{ type: String, require: true},
-    allergyCreateUser:{ type: String, require: true},
-    allergyLastupdateDate:{ type: String, require: true},
-    allergyLastupdateUser:{ type: String, require: true},
-    allergyActive:{ type: String, require: true}
+    allergyCategory:{ type: String, require: true},
+    allergySeverity:{ type: String, require: true}
 });
 
 mongoose.model('Allergy', AllergySchema);

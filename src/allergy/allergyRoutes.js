@@ -6,6 +6,7 @@ var bodyParser = require('body-parser')
 router.use(bodyParser.json())
 
 router.get('/:id', function(req, res){
+    console.log('GET allergies '+req.params.id);
     controller.getAll(req.params.id).then(function(data){
         res.status(data.status).send({
             data: data.data
