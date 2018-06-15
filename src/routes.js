@@ -12,7 +12,7 @@ var intTransferRoutes = require('./internalTransfer/internalTransferRoutes')
 
 router.use('/wards',wardRoutes);
 router.use('/beds',bedRoutes);
-router.use('/prescription', prescriptionRoutes);
+router.use('/prescriptions', prescriptionRoutes);
 router.use('/allergies', allergyRoutes);
 router.use('/admissions', admissionRoutes);
 router.use('/discharges', dischargeRoutes);
